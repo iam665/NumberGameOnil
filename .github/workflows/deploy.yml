@@ -1,0 +1,13 @@
+name: Build & Deploy
+on: [push]          # runs on every push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "dummy build step"
+      - run: mkdir -p dist && echo "ok" > dist/index.html
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
